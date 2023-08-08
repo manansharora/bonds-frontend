@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Card,
@@ -26,7 +28,7 @@ const Product = ({
 }) => {
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
-
+  const navigate = useNavigate();
   return (
     <Card
       sx={{
@@ -61,6 +63,17 @@ const Product = ({
         >
           See More
         </Button>
+        <Link
+          to={`/securities/${_id}/trades`}
+          state={{id: _id}}>
+          <Button
+            variant="primary"
+            size="small"
+            // onClick={() => navigate("/http://localhost:8080/securities/1/trades")}
+          >
+            View Trades
+          </Button>
+        </Link>;
       </CardActions>
       <Collapse
         in={isExpanded}
@@ -85,20 +98,24 @@ const Product = ({
   );
 };
 
-const Sample = () => {
-    const [data, setData] = useState([])
+const Products = () => {
+  const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        console.log('effect')
-        axios
-        .get('http://localhost:8080/security')
-        .then(response => {
-            console.log('promise fulfilled')
-            setData(response.data)
-        })
-    }, [])
+  const fetchData = () => {
+    fetch("http://localhost:8080/security")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setUsers(data);
+      });
+  };
 
-    console.log('render', data.length, 'notes')
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
   const isNonMobile = useMediaQuery("(min-width: 1000px)");
   return (
     <Box m="1.5rem 2.5rem">
@@ -114,10 +131,10 @@ const Sample = () => {
           "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
         }}
       >
-        {data.map((user) => (
+        {users.map((user) => (
           <Product
             key={user.isin}
-            _id={1212}
+            _id={user.id}
             name={user.issuer}
             description={
               "description descriptiondescriptiondescriptiondescription descriptiondescriptiondescriptiondescription"
@@ -134,4 +151,4 @@ const Sample = () => {
   );
 };
 
-export default Sample;
+export default Products;

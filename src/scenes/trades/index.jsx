@@ -4,59 +4,89 @@ import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from 'react';
 
-const Contacts = () => {
+const Trades = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { state } = useLocation();
+  const securityID = state.id;
+  console.log("state: ", securityID);
+
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get(`http://localhost:8080/securities/${securityID}/trades`)
+      .then(response => {
+        console.log('promise fulfilled')
+        setData(response.data)
+        console.log(response.data)
+      })
+  }, [])
+
+  console.log('render', data.length, 'notes')
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
+    { field: "bookId", headerName: "Book ID" },
     {
-      field: "name",
-      headerName: "Name",
+      field: "counterpartyId",
+      headerName: "Counterparty ID",
+      type: "number",
       flex: 1,
       cellClassName: "name-column--cell",
+      headerAlign: "left",
+      align: "left",
     },
     {
-      field: "age",
-      headerName: "Age",
+      field: "quantity",
+      headerName: "Quantity",
       type: "number",
       headerAlign: "left",
       align: "left",
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
+      field: "price",
+      headerName: "Price",
+      type: "number",
+      headerAlign: "left",
+      align: "left",
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "tradeDate",
+      headerName: "Trade Date",
+      type: "date",
       flex: 1,
+      cellClassName: "name-column--cell",
     },
     {
-      field: "address",
-      headerName: "Address",
+      field: "settlementDate",
+      headerName: "Settlement Date",
+      type: "date",
       flex: 1,
+      cellClassName: "name-column--cell",
     },
-    {
-      field: "city",
-      headerName: "City",
-      flex: 1,
+    { 
+      field: "status", 
+      headerName: "Trade Status",
+      type: "checkbox"
     },
-    {
-      field: "zipCode",
-      headerName: "Zip Code",
-      flex: 1,
+    { 
+      field: "buySell", 
+      headerName: "Buy/Sell",
+      type: "checkbox"
     },
   ];
 
   return (
     <Box m="20px">
       <Header
-        title="CONTACTS"
-        subtitle="List of Contacts for Future Reference"
+        title="TRADES"
+        subtitle="List of Trades"
       />
       <Box
         m="40px 0 0 0"
@@ -91,7 +121,7 @@ const Contacts = () => {
         }}
       >
         <DataGrid
-          rows={mockDataContacts}
+          rows={data}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />
@@ -100,4 +130,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Trades;

@@ -5,17 +5,15 @@ import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
 import Securities from "./scenes/securities";
 import Invoices from "./scenes/invoices";
-import Contacts from "./scenes/contacts";
+import Trades from "./scenes/trades";
 import Bar from "./scenes/bar";
 import SecurityForm from "./scenes/securityForm";
 import Line from "./scenes/line";
 import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
 import Sample from "./scenes/products";
-import Geography from "./scenes/geography";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import Calendar from "./scenes/calendar/calendar";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -33,15 +31,14 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/securities" element={<Securities />} />
               <Route path="/sample" element={<Sample />} />
-              <Route path="/contacts" element={<Contacts />} />
+              <Route path="/trades" element={<Trades />} />
+              <Route path="/securities/:id/trades" element={<Trades />} />
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/securityForm" element={<SecurityForm />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />
               <Route path="/faq" element={<FAQ />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/geography" element={<Geography />} />
             </Routes>
           </main>
         </div>
