@@ -177,6 +177,13 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
+              title="Create New Trade"
+              to="/tradesForm"
+              icon={<CalendarTodayOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="FAQ Page"
               to="/faq"
               icon={<HelpOutlineOutlinedIcon />}

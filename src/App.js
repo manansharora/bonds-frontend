@@ -8,6 +8,7 @@ import Invoices from "./scenes/invoices";
 import Trades from "./scenes/trades";
 import Bar from "./scenes/bar";
 import SecurityForm from "./scenes/securityForm";
+import TradeForm from "./scenes/tradesForm";
 import Line from "./scenes/line";
 import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
@@ -35,6 +36,7 @@ function App() {
               <Route path="/securities/:id/trades" element={<Trades />} />
               <Route path="/invoices" element={<Invoices />} />
               <Route path="/securityForm" element={<SecurityForm />} />
+              <Route path="/tradesForm" element={<TradeForm />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />
