@@ -96,7 +96,7 @@ const Securities = () => {
     },
     {
       field: "accessLevel",
-      headerName: "Availability",
+      headerName: "Overdue",
       flex: 1,
       renderCell: ({ row: { access } }) => {
         return (
