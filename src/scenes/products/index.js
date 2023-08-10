@@ -39,6 +39,7 @@ const Product = ({
         backgroundImage: "none",
         backgroundColor: theme.palette.background.alt,
         borderRadius: "0.55rem",
+        border:"2px solid white"
       }}
     >
       <CardContent>
@@ -51,7 +52,7 @@ const Product = ({
             Bond: {type}
           </Typography>
         </b>
-        <hr />
+        <hr style={{backgroundColor:"white",height:"2px"}} />
         <Typography
           sx={{ fontSize: 18 }}
           color={theme.palette.secondary[700]}
@@ -74,7 +75,7 @@ const Product = ({
         >
           Maturity Date: {date}
         </Typography>
-        <hr></hr>
+        <hr style={{backgroundColor:"white",height:"2px"}}></hr>
         <Typography variant="h5" component="div">
           Issuer: {name}
         </Typography>

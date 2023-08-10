@@ -36,6 +36,7 @@ function App() {
           { isAuthenticated() && <Sidebar isSidebar={isSidebar} /> }
           <main className="content">
           { isAuthenticated() && <Topbar setIsSidebar={setIsSidebar} />}
+          {/* { !isAuthenticated() && <Navbar /> } */}
           <Navbar />
             <Routes>
               <Route path="/" element={isAuthenticated() ? <Dashboard /> : <Auth />} />
